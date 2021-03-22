@@ -10,6 +10,9 @@ def respond_to(query, data):
         regex, replacement = entry
 
         if re.match(regex, query, re.IGNORECASE):
-            print("found match")
+            response = re.sub(regex, replacement, query, 1, re.IGNORECASE)
+            return response
 
-respond_to("My name is John Doe", data)
+print(respond_to("My name is John Doe", data)) # Hello, John Doe
+
+# This is probably going to be replaced, but it is a proof of concept :) - Rachit Kakkar
