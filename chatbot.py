@@ -2,10 +2,8 @@ data = [
     ['how are you doing today', 'I am doing well!']
 ]
 
-def jaccard(list1, list2):
-    intersection = len(list(set(list1).intersection(list2)))
-    union = (len(list1) + len(list2)) - intersection
-    return float(intersection) / union
+def jaccard(a: set[str], b: set[str]) -> float:
+    return float(len(a.intersection(b)))/len(a.union(b))
 
 def respond_to(query, data):
     query = query.lower()
