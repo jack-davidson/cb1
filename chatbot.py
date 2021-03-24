@@ -1,18 +1,11 @@
-import re
+import numpy as np
 
-data = [
-    ("^my name is", "Hello,")
-]
+a = [0, 1, 2, 5, 6, 8, 9]
+b = [0, 2, 3, 4, 5, 7, 9]
 
-# Boilerplate
-def respond_to(query, data):
-    for entry in data:
-        regex, replacement = entry
+def jaccard(list1, list2):
+    intersection = len(list(set(list1).intersection(list2)))
+    union = (len(list1) + len(list2)) - intersection
+    return float(intersection) / union
 
-        if re.match(regex, query, re.IGNORECASE):
-            response = re.sub(regex, replacement, query, 1, re.IGNORECASE)
-            return response
-
-print(respond_to("My name is John Doe", data)) # Hello, John Doe
-
-# This is probably going to be replaced, but it is a proof of concept :) - Rachit Kakkar
+jaccard(a, b)
