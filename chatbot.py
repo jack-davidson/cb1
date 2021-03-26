@@ -1,24 +1,28 @@
-data = [
-    ['how are you doing today', 'I am doing well!']
+chat_data = [
+    ['how are you doing today', 'I am doing well!'],
+    ['are you doing today', 'yes']
 ]
+
 
 def jaccard(a: set[str], b: set[str]) -> float:
     return float(len(a.intersection(b)))/len(a.union(b))
 
+
 def respond_to(query, data):
     query = query.lower()
 
-    punctuations = '''!()-[]{};:'"\,<>./?@#$%^&;*_~'''    
-    for mark in punctuations: # Remove Punctuations
+    punctuation = '''!()-[]{};:'"\,<>./?@#$%^&;*_~'''
+    for mark in punctuation:  # Remove Punctuation
         query = query.replace(mark, '')
 
-    for entry in data:
-        keywords, response = entry
-        
-        keywords = set(keywords.split(' '))
-        query = set(query.split(' '))
+    query = query.split()
 
-        if jaccard(query, keywords) > 0.5:
-            return response
+    suitable_entry = 0
+    for i in range(len(chat_data)):
+        if jaccard(set(query), set(chat_data[i][0].split())) > jaccard(set(query), set(chat_data[suitable_entry][0].split())):
+            suitable_entry = i
 
-print(respond_to('How are you doing?', data))
+    return data[suitable_entry][1]
+
+
+print(respond_to('how are you doing today?', chat_data))
