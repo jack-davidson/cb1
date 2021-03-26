@@ -20,9 +20,12 @@ def respond_to(query, data):
     query = remove_punctuation(query.lower()).split()
 
     suitable_entry = 0
-    for i in range(len(chat_data)):
+    for i in range(len(data)):
         if jaccard(set(query), set(chat_data[i][0].split())) > jaccard(set(query), set(chat_data[suitable_entry][0].split())):
             suitable_entry = i
+
+    if jaccard(set(query), set(data[suitable_entry][0])) == 0:
+        return "I don't know"
 
     return data[suitable_entry][1]
 
