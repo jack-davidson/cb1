@@ -10,24 +10,27 @@ def jaccard(a: set[str], b: set[str]) -> float:
 
 
 def remove_punctuation(string):
-    punctuation = '''!()-[]{};:'"\\,<>./?@#$%^&;*_~'''
-    for mark in punctuation:  # Remove Punctuation
-        string = string.replace(mark, '')
-    return string
+    return string.strip('''!()-[]{};:'"\\,<>./?@#$%^&;*_~''')
 
 
 def respond_to(query, data):
+    if query == "bye":
+        exit(1)
+
     query = remove_punctuation(query.lower()).split()
 
     suitable_entry = 0
     for i in range(len(data)):
-        if jaccard(set(query), set(chat_data[i][0].split())) > jaccard(set(query), set(chat_data[suitable_entry][0].split())):
+        keywords = chat_data[i][0].split()
+        if jaccard(set(query), set(keywords)) > jaccard(
+                set(query), set(keywords)):
             suitable_entry = i
 
-    if jaccard(set(query), set(data[suitable_entry][0])) == 0:
+    if jaccard(set(query), set(data[suitable_entry][0].split())) == 0:
         return "I don't know"
 
     return data[suitable_entry][1]
 
 
-print(respond_to('how are you doing today?', chat_data))
+while True:
+    print(respond_to(input("> "), chat_data))
