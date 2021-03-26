@@ -8,14 +8,15 @@ def jaccard(a: set[str], b: set[str]) -> float:
     return float(len(a.intersection(b)))/len(a.union(b))
 
 
-def respond_to(query, data):
-    query = query.lower()
-
-    punctuation = '''!()-[]{};:'"\,<>./?@#$%^&;*_~'''
+def remove_punctuation(string):
+    punctuation = '''!()-[]{};:'"\\,<>./?@#$%^&;*_~'''
     for mark in punctuation:  # Remove Punctuation
-        query = query.replace(mark, '')
+        string = string.replace(mark, '')
+    return string
 
-    query = query.split()
+
+def respond_to(query, data):
+    query = query.lower().remove_punctuation(query).split()
 
     suitable_entry = 0
     for i in range(len(chat_data)):
