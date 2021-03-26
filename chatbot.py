@@ -1,24 +1,36 @@
-data = [
-    ['how are you doing today', 'I am doing well!']
-]
+import json
+
+with open("data/dataset.json") as f:
+    chat_data = json.loads(f.read())
+    f.close()
+
 
 def jaccard(a: set[str], b: set[str]) -> float:
     return float(len(a.intersection(b)))/len(a.union(b))
 
+
+def remove_punctuation(string):
+    return string.strip('''!()-[]{};:'"\\,<>./?@#$%^&;*_~''')
+
+
 def respond_to(query, data):
-    query = query.lower()
+    if query == "bye":
+        exit(1)
 
-    punctuations = '''!()-[]{};:'"\,<>./?@#$%^&;*_~'''    
-    for mark in punctuations: # Remove Punctuations
-        query = query.replace(mark, '')
+    query = remove_punctuation(query.lower()).split()
 
-    for entry in data:
-        keywords, response = entry
-        
-        keywords = set(keywords.split(' '))
-        query = set(query.split(' '))
+    suitable_entry = 0
+    for i in range(len(data)):
+        keywords = chat_data[i][0].split()
+        if jaccard(set(query), set(keywords)) > jaccard(
+                set(query), set(keywords)):
+            suitable_entry = i
 
-        if jaccard(query, keywords) > 0.5:
-            return response
+    if jaccard(set(query), set(data[suitable_entry][0].split())) == 0:
+        return "I don't know"
 
-print(respond_to('How are you doing?', data))
+    return data[suitable_entry][1]
+
+
+while True:
+    print(respond_to(input("> "), chat_data))
