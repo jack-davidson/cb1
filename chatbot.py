@@ -4,19 +4,22 @@ with open("data/dataset.json") as f:
     chat_data = json.loads(f.read())
     f.close()
 
-
 def jaccard(a: set[str], b: set[str]) -> float:
     return float(len(a.intersection(b)))/len(a.union(b))
-
 
 def remove_punctuation(string):
     return string.strip('''!()-[]{};:'"\\,<>./?@#$%^&;*_~''')
 
+def write_string_to_file(string, filepath):
+    file = open(filepath, 'a')
+    file.write(string)
+    file.close()
 
 def respond_to(query, data):
-    if query == "bye":
+    if query == "quit":
         exit(1)
 
+    cached_query = query # Save the query so we can write it to a text file it the bot can't understand it
     query = remove_punctuation(query.lower()).split()
 
     suitable_entry = 0
@@ -27,7 +30,8 @@ def respond_to(query, data):
             suitable_entry = i
 
     if jaccard(set(query), set(data[suitable_entry][0].split())) == 0:
-        return "I don't know"
+        write_string_to_file(cached_query, 'data/log.txt')
+        return "I cannot understand your problem. Transferring you to my superior."
 
     return data[suitable_entry][1]
 
