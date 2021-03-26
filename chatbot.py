@@ -1,7 +1,8 @@
-chat_data = [
-    ['how are you doing today', 'I am doing well!'],
-    ['are you doing today', 'yes']
-]
+import json
+
+with open("data/dataset.json") as f:
+    chat_data = json.loads(f.read())
+    f.close()
 
 
 def jaccard(a: set[str], b: set[str]) -> float:
@@ -16,7 +17,7 @@ def remove_punctuation(string):
 
 
 def respond_to(query, data):
-    query = query.lower().remove_punctuation(query).split()
+    query = remove_punctuation(query.lower()).split()
 
     suitable_entry = 0
     for i in range(len(chat_data)):
