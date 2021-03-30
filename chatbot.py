@@ -23,7 +23,8 @@ def respond_to(query, data):
     if query == "quit":
         exit(1)
 
-    cached_query = query # Save the query so we can write it to a text file it the bot can't understand it
+    # Save the query so we can write it to a text
+    # file it the bot can't understand it
     query = remove_punctuation(query.lower()).split()
     print(query)
 
