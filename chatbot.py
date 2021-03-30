@@ -33,6 +33,9 @@ def respond_to(query, data):
         if jaccard(set(query), set(keyword)) > jaccard(set(query), data[best_response][0].split()):
             best_response = i
 
+    if jaccard(set(query), set(data[best_response][0].split())) < 0.2:
+        print("ERROR")
+
     return data[best_response][1]
 
 
