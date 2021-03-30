@@ -4,16 +4,20 @@ with open("data/dataset.json") as f:
     chat_data = json.loads(f.read())
     f.close()
 
+
 def jaccard(a: set[str], b: set[str]) -> float:
     return float(len(a.intersection(b)))/len(a.union(b))
 
+
 def remove_punctuation(string):
     return string.strip('''!()-[]{};:'"\\,<>./?@#$%^&;*_~''')
+
 
 def write_string_to_file(string, filepath):
     file = open(filepath, 'a')
     file.write(string + '\n')
     file.close()
+
 
 def respond_to(query, data):
     if query == "quit":
@@ -40,3 +44,4 @@ def respond_to(query, data):
 print("Type 'quit' To Leave This Conversation")
 while True:
     print(respond_to(input("> "), chat_data))
+
