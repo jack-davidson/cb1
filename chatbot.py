@@ -31,7 +31,8 @@ def respond_to(query, data):
     best_response = 0
     for i in range(len(data)):
         keyword = data[i][0].split()
-        if jaccard(set(query), set(keyword)) > jaccard(set(query), data[best_response][0].split()):
+        if jaccard(set(query), set(keyword)) > jaccard(
+                set(query), data[best_response][0].split()):
             best_response = i
 
     if jaccard(set(query), set(data[best_response][0].split())) < 0.2:
