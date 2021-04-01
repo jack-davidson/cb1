@@ -5,7 +5,7 @@ with open("data/dataset.json") as f:
     f.close()
 
 
-def jaccard(a: set[str], b: set[str]) -> float:
+def jaccard(a, b):
     return float(len(a.intersection(b)))/len(a.union(b))
 
 
@@ -34,14 +34,13 @@ def respond_to(query, data):
                 set(query), data[best_response][0].split()):
             best_response = i
 
-    if jaccard(set(query), set(data[best_response][0].split())) < 0.2:
+    if jaccard(set(query), set(data[best_response][0].split())) == 0:
         write_string_to_file(str(query), "data/log.txt")
         return "I cannot understand your problem. Transferring you to my superior."
 
     return data[best_response][1]
 
-
-print("Type 'quit' To Leave This Conversation")
-while True:
-    print(respond_to(input("> "), chat_data))
-
+if __name__ == "__main__":
+    print("Type 'quit' To Leave This Conversation")
+    while True:
+        print(respond_to(input("> "), chat_data))
