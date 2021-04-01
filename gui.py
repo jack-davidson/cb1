@@ -9,7 +9,7 @@ def process_request():
 window = tk.Tk()
 window.title("CB-1")
 window.configure(width=500, height=300)
-window.configure(bg='lightgray')
+window.configure(bg="lightgray")
 
 LB1 = tk.Label(window, text="      ")
 LB1.pack()
