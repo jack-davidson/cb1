@@ -4,5 +4,6 @@
     ["discharged my phone battery lasts only dies quickly", "You might need to replace the battery!"],
     ["my phone ran out of storage no room for pictures no space", "You may need to delete old photos or use cloud storage!"],
     ["my phone is slow long time loads slowly", "You may need to clear background processes/restart your phone!"],
-    ["hello how is your day are you doing good well", "I am doing great!"]
+    ["hello how is your day are you doing good well", "I am doing great!"],
+    ["hello hi good morning afternoon", "Hi!"]
 ]
