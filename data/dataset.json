@@ -5,7 +5,7 @@
     ["my phone ran out of storage no room for pictures no space", "You may need to delete old photos or use cloud storage!"],
     ["my phone is slow long time loads slowly", "You may need to clear background processes/restart your phone!"],
     ["hello how is your day are you doing good well", "Yes, I am doing great!"],
-    ["wifi doesn't work", "You may need to get your device serviced"],
-    ["network doesn't work", "You may need to get your device serviced"],
-    ["windows", "you may need to install GNU/Linux"]
+    ["network doesn't work trouble not connecting no wifi no internet", "You may need to get your device serviced!"],
+    ["windows", "You may need to install GNU/Linux!"],
+    ["my printer doesn't work fails doesn't connect not found", "You may need to install printer drivers!"]
 ]
