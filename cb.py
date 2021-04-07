@@ -43,5 +43,6 @@ def respond_to(query, data):
 
 if __name__ == "__main__":
     print("Type 'quit' To Leave This Conversation")
+    print("Ask me questions about broken phones, broken laptops and getting them fixed!")
     while True:
         print(respond_to(input("> "), chat_data))
